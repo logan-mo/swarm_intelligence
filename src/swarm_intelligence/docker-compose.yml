@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  agent_0:
+    build: .
+    container_name: agent_0
+    networks:
+      - agent_network
+    environment:
+      - BASE_PORT=5000
+      - PORT_RANGE=10
+      - HOST=agent_0
+      - AGENT_ID=0  # Set agent ID for this container
+    volumes:
+      - agent_logs:/logs
+    restart: no
+
+  agent_1:
+    build: .
+    container_name: agent_1
+    networks:
+      - agent_network
+    environment:
+      - BASE_PORT=5000
+      - PORT_RANGE=10
+      - HOST=agent_1
+      - AGENT_ID=1  # Set agent ID for this container
+    volumes:
+      - agent_logs:/logs
+    restart: no
+
+  agent_2:
+    build: .
+    container_name: agent_2
+    networks:
+      - agent_network
+    environment:
+      - BASE_PORT=5000
+      - PORT_RANGE=10
+      - HOST=agent_2
+      - AGENT_ID=2  # Set agent ID for this container
+    volumes:
+      - agent_logs:/logs
+    restart: no
+
+  # Repeat for additional agents (agent_3, agent_4, ...) as needed
+
+networks:
+  agent_network:
+    driver: bridge
+
+volumes:
+  agent_logs:
+    driver: local
